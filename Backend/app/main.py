@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import auth, account
+from app.routes import auth, account, category
 from app.core.config import settings
 
 app = FastAPI(
@@ -21,6 +21,7 @@ app.add_middleware(
 # Aqui vamos registrar as rotas de autenticação depois
 app.include_router(auth.router)
 app.include_router(account.router)
+app.include_router(category.router)
 
 @app.get("/")
 def home():
