@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import auth, account, category
+from app.routes import auth, account, category, third_party
 from app.core.config import settings
 
 app = FastAPI(
@@ -22,6 +22,7 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(account.router)
 app.include_router(category.router)
+app.include_router(third_party.router)
 
 @app.get("/")
 def home():

@@ -2,31 +2,33 @@ from decimal import Decimal
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 
-# Esquema base com campos comuns
+
+### Inicio User Schemas ###
 class UserBase(BaseModel):
     nome: str
     email: EmailStr
 
-# O que o usuário envia no momento do Cadastro
 class UserCreate(UserBase):
     senha: str
 
-# O que o usuário envia no momento do Login
 class UserLogin(BaseModel):
     email: EmailStr
     senha: str
 
-# O que a API devolve para o Frontend (Segurança: sem senha aqui!)
 class UserResponse(UserBase):
     id: int
     ativo: bool
 
     class Config:
-        from_attributes = True # Permite ler os dados do SQLAlchemy automaticamente
+        from_attributes = True
+### Fim User Schemas ###
 
-# Schema para refresh token
+
+
+### Inicio Token Schemas ###
 class TokenRefresh(BaseModel):
     refresh_token: str
+### Fim Token Schemas ###
 
 
 
@@ -47,6 +49,7 @@ class ContaResponse(ContaBase):
 ### Fim Conta Schemas ###
 
 
+
 ### Inicio Categoria Schemas ###
 class CategoriaBase(BaseModel):
     nome: str
@@ -61,3 +64,19 @@ class CategoriaResponse(CategoriaBase):
     class Config:
         from_attributes = True
 ### Fim Categoria Schemas ###
+
+
+
+### Inicio Terceiro Schemas ###
+class TerceiroBase(BaseModel):
+    nome: str
+
+class TerceiroCreate(TerceiroBase):
+    pass
+
+class TerceiroResponse(TerceiroBase):
+    id: int
+    
+    class Config:
+        from_attributes = True
+### Fim Terceiro Schemas ###
