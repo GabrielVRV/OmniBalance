@@ -1,3 +1,4 @@
+from decimal import Decimal
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 
@@ -26,3 +27,37 @@ class UserResponse(UserBase):
 # Schema para refresh token
 class TokenRefresh(BaseModel):
     refresh_token: str
+
+
+
+### Inicio Conta Schemas ###
+class ContaBase(BaseModel):
+    nome: str
+    tipo: str
+
+class ContaCreate(ContaBase):
+    balanco: Decimal
+
+class ContaResponse(ContaBase):
+    id: int
+    balanco: Decimal
+    
+    class Config:
+        from_attributes = True
+### Fim Conta Schemas ###
+
+
+### Inicio Categoria Schemas ###
+class CategoriaBase(BaseModel):
+    nome: str
+    tipo: str
+
+class CategoriaCreate(CategoriaBase):
+    pass
+
+class CategoriaResponse(CategoriaBase):
+    id: int
+    
+    class Config:
+        from_attributes = True
+### Fim Categoria Schemas ###
